@@ -372,7 +372,8 @@ function App() {
                   <h2 style={{ fontSize: '26px', fontWeight: '700', color: colors.textMain, margin: '0 0 8px 0' }}>Official E-Visa System</h2>
                   <p style={{ fontSize: '14px', color: colors.textMuted, lineHeight: '1.6', margin: '0 0 35px 0' }}>Sign in to open your filing workspace or request account creation options to initialize form validation sheets.</p>
                   <div style={{ display: 'flex', gap: '16px' }}>
-                    <button onClick={() => { navigateTo('user-auth'); setAuthMode('register'); }} style={{ ...buttonStyle(hoveredItem === 'btn-reg'), width: 'auto', padding: '14px 28px' }} onMouseEnter={() => hoveredItem('btn-reg')} onMouseLeave={() => hoveredItem(null)}>Create Account</button>
+                    {/* 🟢 FIXED BOTH HOVER FUNCTIONS BELOW */}
+                    <button onClick={() => { navigateTo('user-auth'); setAuthMode('register'); }} style={{ ...buttonStyle(hoveredItem === 'btn-reg'), width: 'auto', padding: '14px 28px' }} onMouseEnter={() => setHoveredItem('btn-reg')} onMouseLeave={() => setHoveredItem(null)}>Create Account</button>
                     <button onClick={() => { navigateTo('public-track'); }} style={{ backgroundColor: 'transparent', border: `1px solid ${colors.border}`, color: colors.textMain, padding: '14px 28px', borderRadius: '6px', fontSize: '14px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.15s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = '#F8FAFC'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; }}>Track Status</button>
                   </div>
                 </div>
