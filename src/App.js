@@ -84,6 +84,7 @@ function App() {
 
   const fetchApplications = async () => {
     try {
+      // 🟢 SWAPPED TO API_URL VARIABLE
       const response = await fetch(API_URL);
       if (response.ok) {
         const resData = await response.json();
@@ -120,6 +121,7 @@ function App() {
     if (!validateForm()) return;
     setLoading(true);
     try {
+      // 🟢 SWAPPED TO API_URL VARIABLE
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -142,6 +144,7 @@ function App() {
 
   const handleStatusUpdate = async (id, newStatus) => {
     try {
+      // 🟢 SWAPPED TO API_URL VARIABLE
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -634,18 +637,17 @@ function App() {
                 <div><label style={{ fontSize: '11px', color: '#64748B', fontWeight: '600', display: 'block', marginBottom: '2px' }}>Full Legal Name</label><span style={{ fontSize: '14px', color: colors.textMain, fontWeight: '600' }}>{selectedVisa.fullName}</span></div>
                 <div><label style={{ fontSize: '11px', color: '#64748B', fontWeight: '600', display: 'block', marginBottom: '2px' }}>Passport Number</label><span style={{ fontSize: '14px', color: colors.textMain, fontFamily: 'monospace' }}>{selectedVisa.passportNum}</span></div>
                 <div><label style={{ fontSize: '11px', color: '#64748B', fontWeight: '600', display: 'block', marginBottom: '2px' }}>Nationality</label><span style={{ fontSize: '14px', color: colors.textMain }}>{selectedVisa.nationality}</span></div>
-                <div><label style={{ fontSize: '11px', color: '#64748B', fontWeight: '600', display: 'block', marginBottom: '2px' }}>Issue Date</label><span style={{ fontSize: '14px', color: colors.textMain }}>{(selectedVisa.date || '').substring(0, 10)}</span></div>
+                <div><label style={{ fontSize: '11px', color: '#64748B', fontWeight: '600', display: 'block', marginBottom: '2px' }}>Issue Date</label><span style={{ fontSize: '14px', color: colors.textMain }}>{selectedVisa.date.substring(0, 10)}</span></div>
               </div>
               <div style={{ marginTop: '35px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{ textAlign: 'left' }}>
                   <div style={{ width: '120px', height: '1px', backgroundColor: '#CBD5E1', marginBottom: '6px' }}></div>
                   <span style={{ fontSize: '11px', color: colors.textMuted, fontWeight: '500' }}>Consular Authority</span>
                 </div>
-                {/* 🟢 THE LAST REMAINING HOVER BUG FIX WAS PLACED RIGHT IN THE EVENT Handlers OF THIS BUTTON */}
                 <div style={{ border: `2px solid ${colors.colorApproved}`, color: colors.colorApproved, padding: '8px 16px', fontSize: '13px', fontWeight: '700', borderRadius: '6px', transform: 'rotate(-3deg)', backgroundColor: '#F0FDF4' }}>SECURE GRANTED</div>
               </div>
             </div>
-            <button onClick={() => window.print()} style={{ ...buttonStyle(hoveredItem === 'btn-print'), marginTop: '35px' }} onMouseEnter={() => setHoveredItem('btn-print')} onMouseLeave={() => setHoveredItem(null)}>Print Document</button>
+            <button onClick={() => window.print()} style={{ ...buttonStyle(hoveredItem === 'btn-print'), marginTop: '35px' }} onMouseEnter={() => setHoveredItem('btn-print'), onMouseLeave = () => setHoveredItem(null)}>Print Document</button>
           </div>
         </div>
       )}
