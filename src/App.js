@@ -372,7 +372,6 @@ function App() {
                   <h2 style={{ fontSize: '26px', fontWeight: '700', color: colors.textMain, margin: '0 0 8px 0' }}>Official E-Visa System</h2>
                   <p style={{ fontSize: '14px', color: colors.textMuted, lineHeight: '1.6', margin: '0 0 35px 0' }}>Sign in to open your filing workspace or request account creation options to initialize form validation sheets.</p>
                   <div style={{ display: 'flex', gap: '16px' }}>
-                    {/* 🟢 FIXED BOTH HOVER FUNCTIONS BELOW */}
                     <button onClick={() => { navigateTo('user-auth'); setAuthMode('register'); }} style={{ ...buttonStyle(hoveredItem === 'btn-reg'), width: 'auto', padding: '14px 28px' }} onMouseEnter={() => setHoveredItem('btn-reg')} onMouseLeave={() => setHoveredItem(null)}>Create Account</button>
                     <button onClick={() => { navigateTo('public-track'); }} style={{ backgroundColor: 'transparent', border: `1px solid ${colors.border}`, color: colors.textMain, padding: '14px 28px', borderRadius: '6px', fontSize: '14px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.15s' }} onMouseEnter={(e) => { e.target.style.backgroundColor = '#F8FAFC'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; }}>Track Status</button>
                   </div>
@@ -642,10 +641,11 @@ function App() {
                   <div style={{ width: '120px', height: '1px', backgroundColor: '#CBD5E1', marginBottom: '6px' }}></div>
                   <span style={{ fontSize: '11px', color: colors.textMuted, fontWeight: '500' }}>Consular Authority</span>
                 </div>
+                {/* 🟢 THE LAST REMAINING HOVER BUG FIX WAS PLACED RIGHT IN THE EVENT Handlers OF THIS BUTTON */}
                 <div style={{ border: `2px solid ${colors.colorApproved}`, color: colors.colorApproved, padding: '8px 16px', fontSize: '13px', fontWeight: '700', borderRadius: '6px', transform: 'rotate(-3deg)', backgroundColor: '#F0FDF4' }}>SECURE GRANTED</div>
               </div>
             </div>
-            <button onClick={() => window.print()} style={{ ...buttonStyle(hoveredItem === 'btn-print'), marginTop: '35px' }} onMouseEnter={() => setHoveredItem('btn-print')} onMouseLeave={() => hoveredItem(null)}>Print Document</button>
+            <button onClick={() => window.print()} style={{ ...buttonStyle(hoveredItem === 'btn-print'), marginTop: '35px' }} onMouseEnter={() => setHoveredItem('btn-print')} onMouseLeave={() => setHoveredItem(null)}>Print Document</button>
           </div>
         </div>
       )}
