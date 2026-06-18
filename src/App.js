@@ -162,12 +162,12 @@ function App() {
 
   const handlePublicTrack = async (e) => {
     e.preventDefault();
-    loading(true);
+    setLoading(true);
     const freshData = await fetchApplications();
     const match = freshData.find(app => app.passportNum.trim().toLowerCase() === publicPassport.trim().toLowerCase());
     setPublicTrackedRecord(match || null);
     setHasTrackedPublic(true);
-    loading(false);
+    setLoading(false);
   };
 
   const handleUserAuth = async (e) => {
@@ -304,7 +304,6 @@ function App() {
     fontSize: '12px', fontWeight: '600', borderRadius: '4px', cursor: 'pointer', marginRight: '6px'
   });
 
-  // Render Left Side Premium Brand Anchor Block
   const renderLeftBrandingPanel = (subtext) => (
     <div style={{ backgroundColor: colors.sidebarBg, color: colors.sidebarText, padding: '50px', width: '40%', display: 'flex', flexDirection: 'column', boxSizing: 'border-box', minHeight: '550px', justifyContent: 'space-between', borderTopLeftRadius: '12px', borderBottomLeftRadius: '12px' }}>
       <div>
@@ -324,7 +323,6 @@ function App() {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: colors.bg, fontFamily: '"Segoe UI", Roboto, sans-serif', color: colors.textMain, display: 'flex', flexDirection: 'column' }}>
       
-      {/* Dynamic Navbar */}
       <nav style={{ backgroundColor: isSplitLayoutView ? '#FFFFFF' : colors.sidebarBg, padding: '0 50px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '75px', borderBottom: isSplitLayoutView ? `1px solid ${colors.border}` : 'none', boxShadow: '0 2px 10px rgba(0,0,0,0.01)' }}>
         <div onClick={handleSignOut} style={{ fontWeight: '800', color: isSplitLayoutView ? colors.sidebarBg : '#FFFFFF', fontSize: '20px', cursor: 'pointer' }}>
           GLOBAL E-VISA
@@ -356,10 +354,8 @@ function App() {
         </div>
       </nav>
 
-      {/* Main Framework Layout Grid */}
       <div style={{ display: 'flex', alignItems: 'center', padding: '50px 24px', justifyContent: 'center', flex: 1 }}>
         
-        {/* Split-Screen Dashboard Shell */}
         {isSplitLayoutView && (
           <div style={{ display: 'flex', maxWidth: '950px', width: '100%', backgroundColor: '#FFFFFF', borderRadius: '12px', boxShadow: '0 25px 50px -12px rgba(15, 23, 42, 0.08)', border: `1px solid ${colors.border}`, minHeight: '550px' }}>
             
@@ -441,7 +437,6 @@ function App() {
           </div>
         )}
 
-        {/* Public Tracking Lookup Workspace Frame */}
         {view === 'public-track' && (
           <div style={{ maxWidth: '700px', width: '100%' }}>
             <div style={layoutCardStyle()}>
@@ -470,7 +465,6 @@ function App() {
                       <span style={getStatusBadgeStyle(publicTrackedRecord.status)}>{publicTrackedRecord.status}</span>
                     </div>
 
-                    {/* Operational Tracking Progression Timeline */}
                     <div style={{ display: 'flex', justifyContent: 'space-between', position: 'relative', margin: '0 auto 30px', maxWidth: '480px' }}>
                       <div style={{ position: 'absolute', top: '10px', left: '8%', right: '8%', height: '2px', backgroundColor: colors.border, zIndex: 1 }}>
                         <div style={{ width: publicTrackedRecord.status === 'PENDING' ? '50%' : '100%', height: '100%', backgroundColor: publicTrackedRecord.status === 'REJECTED' ? colors.colorRejected : colors.colorApproved }}></div>
@@ -490,7 +484,6 @@ function App() {
           </div>
         )}
 
-        {/* Authenticated User Dashboard Frame Layout */}
         {view === 'user-dashboard' && currentUser && (
           <div style={{ maxWidth: '950px', width: '100%' }}>
             <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', backgroundColor: '#E2E8F0', padding: '6px', borderRadius: '8px', width: 'fit-content' }}>
@@ -556,7 +549,6 @@ function App() {
           </div>
         )}
 
-        {/* Administrative Management Control Dashboard */}
         {view === 'admin-dashboard' && isAdminLoggedIn && (
           <div style={{ ...layoutCardStyle(), maxWidth: '1200px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '24px', marginBottom: '35px' }}>
@@ -567,7 +559,6 @@ function App() {
               </div>
             </div>
 
-            {/* Metric Metrics Row Component */}
             <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginBottom: '40px' }}>
               <div style={metricCardStyle}><span style={{ fontSize: '11px', fontWeight: '700', color: colors.textMuted, textTransform: 'uppercase' }}>Total Ingested Rows</span><div style={{ fontSize: '28px', fontWeight: '700', marginTop: '6px' }}>{totalCount}</div></div>
               <div style={metricCardStyle}><span style={{ fontSize: '11px', fontWeight: '700', color: colors.colorPending, textTransform: 'uppercase' }}>Review Backlog Queue</span><div style={{ fontSize: '28px', fontWeight: '700', marginTop: '6px' }}>{pendingCount}</div></div>
@@ -618,7 +609,6 @@ function App() {
         )}
       </div>
 
-      {/* Printable E-Visa Overlay Sheet Certificate */}
       {selectedVisa && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(15, 23, 42, 0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', zIndex: 1000, backdropFilter: 'blur(3px)' }}>
           <div style={{ backgroundColor: '#FFFFFF', padding: '50px', borderRadius: '8px', maxWidth: '600px', width: '100%', border: '1px solid #E2E8F0', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', position: 'relative' }}>
