@@ -5,10 +5,12 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "serve": "^14.2.4"
   },
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts build && npx serve -s build -l 8080",
+    "build": "react-scripts build"
   },
   "browserslist": {
     "production": [
