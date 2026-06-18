@@ -84,7 +84,6 @@ function App() {
 
   const fetchApplications = async () => {
     try {
-      // 🟢 SWAPPED TO API_URL VARIABLE
       const response = await fetch(API_URL);
       if (response.ok) {
         const resData = await response.json();
@@ -121,11 +120,15 @@ function App() {
     if (!validateForm()) return;
     setLoading(true);
     try {
-      // 🟢 SWAPPED TO API_URL VARIABLE
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data)
+        body: new URLSearchParams({
+          action: 'lodgeApplication',
+          fullName: data.fullName,
+          passportNum: data.passportNum,
+          nationality: data.nationality
+        })
       });
       if (response.ok) {
         alert("Application Submitted Successfully!");
@@ -144,7 +147,6 @@ function App() {
 
   const handleStatusUpdate = async (id, newStatus) => {
     try {
-      // 🟢 SWAPPED TO API_URL VARIABLE
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -160,12 +162,12 @@ function App() {
 
   const handlePublicTrack = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    loading(true);
     const freshData = await fetchApplications();
     const match = freshData.find(app => app.passportNum.trim().toLowerCase() === publicPassport.trim().toLowerCase());
     setPublicTrackedRecord(match || null);
     setHasTrackedPublic(true);
-    setLoading(false);
+    loading(false);
   };
 
   const handleUserAuth = async (e) => {
@@ -200,9 +202,9 @@ function App() {
         });
 
         if (response.ok) {
-          const sessionUser = { fullName: authName, nationality: authNationality };
-          setCurrentUser(sessionUser);
-          setData({ fullName: authName, passportNum: '', nationality: authNationality });
+          const resProfile = await response.json();
+          setCurrentUser(resProfile);
+          setData({ fullName: resProfile.fullName, passportNum: '', nationality: resProfile.nationality });
           setShowNotice(true);
           navigateTo('user-dashboard');
           setDashboardView('new-app');
@@ -301,13 +303,6 @@ function App() {
     color: type === 'approve' ? colors.colorApproved : colors.colorRejected, padding: '6px 14px',
     fontSize: '12px', fontWeight: '600', borderRadius: '4px', cursor: 'pointer', marginRight: '6px'
   });
-
-  // Analytics totals
-  const totalCount = applications.length;
-  const pendingCount = applications.filter(app => app.status === 'PENDING').length;
-  const approvedCount = applications.filter(app => app.status === 'APPROVED').length;
-  const totalDecided = approvedCount + applications.filter(app => app.status === 'REJECTED').length;
-  const approvalRate = totalDecided > 0 ? Math.round((approvedCount / totalDecided) * 100) : 0;
 
   // Render Left Side Premium Brand Anchor Block
   const renderLeftBrandingPanel = (subtext) => (
@@ -647,7 +642,7 @@ function App() {
                 <div style={{ border: `2px solid ${colors.colorApproved}`, color: colors.colorApproved, padding: '8px 16px', fontSize: '13px', fontWeight: '700', borderRadius: '6px', transform: 'rotate(-3deg)', backgroundColor: '#F0FDF4' }}>SECURE GRANTED</div>
               </div>
             </div>
-            <button onClick={() => window.print()} style={{ ...buttonStyle(hoveredItem === 'btn-print'), marginTop: '35px' }} onMouseEnter={() => setHoveredItem('btn-print'), onMouseLeave = () => setHoveredItem(null)}>Print Document</button>
+            <button onClick={() => window.print()} style={{ ...buttonStyle(hoveredItem === 'btn-print'), marginTop: '35px' }} onMouseEnter={() => setHoveredItem('btn-print')} onMouseLeave={() => setHoveredItem(null)}>Print Document</button>
           </div>
         </div>
       )}
