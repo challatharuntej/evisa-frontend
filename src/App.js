@@ -250,6 +250,11 @@ function App() {
     app.fullName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const totalCount = applications.length;
+  const pendingCount = applications.filter(app => app.status === 'PENDING').length;
+  const approvedCount = applications.filter(app => app.status === 'APPROVED').length;
+  const approvalRate = totalCount === 0 ? 0 : Math.round((approvedCount / totalCount) * 100);
+
   const exportToCSV = () => {
     if (applications.length === 0) return alert("Empty database records.");
     const headers = ["Application ID", "Full Name", "Passport Number", "Nationality", "Status", "Submission Date\n"];
