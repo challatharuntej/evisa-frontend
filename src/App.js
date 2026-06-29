@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 function App() {
   // 🟢 LIVE CLOUD ENDPOINT ROUTE
-  const API_URL = "https://app-58ad83c3-9374-408d-a591-e7934f8cf878.cleverapps.io/ApplicationController";
+  const API_URL = "https://app-58ad83c3-9374-408d-a591-e7934f8cf878.cleverapps.io/DistributedEVisa/ApplicationController";
 
   const [view, setView] = useState('welcome'); 
   const [authMode, setAuthMode] = useState('login'); 
